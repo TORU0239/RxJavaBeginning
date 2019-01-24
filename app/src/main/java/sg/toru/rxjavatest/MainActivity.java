@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchEdit;
     private TextView resultTxt;
 
-    private ArrayList<Disposable> disposableArrayList;
+    private CompositeDisposable disposableArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        disposableArrayList = new ArrayList<>();
+        disposableArrayList = new CompositeDisposable();
         searchEdit = findViewById(R.id.ed_search);
         resultTxt = findViewById(R.id.txt_opr);
 
@@ -85,10 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        for(Disposable d: disposableArrayList){
-            if(!d.isDisposed()){
-                d.dispose();
-            }
+        if(!disposableArrayList.isDisposed()){
+            disposableArrayList.clear();
         }
         super.onDestroy();
     }
