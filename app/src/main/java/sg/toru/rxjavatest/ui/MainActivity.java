@@ -1,4 +1,4 @@
-package sg.toru.rxjavatest;
+package sg.toru.rxjavatest.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -18,10 +16,9 @@ import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
+import sg.toru.rxjavatest.R;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
