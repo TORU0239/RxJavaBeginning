@@ -18,6 +18,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
@@ -73,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
             Disposable run = Observable.just(resultTxt.getText())
                     .map(CharSequence::toString)
                     .flatMap((Function<String, ObservableSource<String>>) s -> Observable.just(s.concat("씨발")).delay(500, TimeUnit.MILLISECONDS))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
                     .subscribe(s -> Log.e("MainActivity", "s :: " + s));
             disposableArrayList.add(run);
         });
